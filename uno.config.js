@@ -14,7 +14,7 @@ export default defineConfig({
 		{
 			"sidebar-open": "w-240px px-2 lg:w-240px",
 			"sidebar-close": "w-48px px-2 lg:w-48px",
-			btn: "rounded-2 border-1 border-transparent px-1.2em py-0.6em text-1em font-500 whitespace-nowrap transition-border-color duration-250 cursor-pointer bg-#0f0f0f98 text-#ffffff hover:border-#396cd8 active:bg-#0f0f0f69 shadow-[0_2px_2px_rgba(0,0,0,0.2)]",
+			btn: "rounded-2 px-4 py-3 text-sm whitespace-nowrap transition-border-color duration-200 cursor-pointer bg-#222222 font-500 hover:bg-background-70 active:bg-background-70",
 		},
 	],
 	rules: [],
@@ -28,6 +28,7 @@ export default defineConfig({
 			},
 			content: {
 				DEFAULT: "var(--color-content)",
+				90: "var(--color-content-90)",
 			},
 		},
 	},

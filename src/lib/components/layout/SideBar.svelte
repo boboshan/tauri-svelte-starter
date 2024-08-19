@@ -1,9 +1,10 @@
 <script>
-	import { page } from "$app/stores";
 	import { slide } from "svelte/transition";
 	import { navLinks } from "$lib/config";
 	import Menu from "$lib/icons/Menu.svelte";
 	import Setting from "$lib/icons/Setting.svelte";
+
+	let { url } = $props();
 
 	let sidebar = $state({
 		open: false,
@@ -16,9 +17,7 @@
 	let previousIndex = 0;
 
 	let activeLink = $derived.by(() => {
-		const newIndex = navLinks.findIndex(
-			(link) => link.href === $page.url.pathname
-		);
+		const newIndex = navLinks.findIndex((link) => link.href === url);
 		if (newIndex !== currentIndex) {
 			previousIndex = currentIndex;
 			currentIndex = newIndex;
@@ -61,7 +60,7 @@
 	class:sidebar-open={sidebar.open}
 	class:sidebar-close={!sidebar.open}
 >
-	<nav class="flex flex-col select-none gap-1">
+	<nav class="mt-6 flex flex-col select-none gap-1">
 		<button
 			class="group flex justify-center items-center w-10 h-9 px-1 py-1.5 rounded-md bg-inherit hover:bg-background-70 active:bg-background-80 transition-colors transition-transform duration-100 text-center"
 			onclick={toggleMenu}
@@ -81,7 +80,7 @@
 				}}
 				onmouseleave={() => (sidebar.hovered = "")}
 				data-current={activeLink.currentIndex === index}
-				class="relative px-1 py-1.5 rounded-md transition-colors transition-transform duration-100 hover:bg-background-70 data-[current=true]:bg-background-70 data-[current=true]:hover:not-active:bg-background-80 active:before:bg-blue-8 before:(absolute content-empty left--0.5 w-1 rounded bg-blue-5)"
+				class="relative w-full whitespace-nowrap rounded-md transition-colors transition-transform duration-100 hover:bg-background-70 active:text-content-90 data-[current=true]:bg-background-70 data-[current=true]:hover:not-active:bg-background-80 active:before:bg-blue-8 before:(absolute content-empty left--0.5 w-1 rounded bg-blue-5)"
 				class:indicator-from-top={activeLink.currentIndex === index
 					? activeLink.previousIndex <= activeLink.currentIndex
 					: activeLink.previousIndex === index
@@ -93,16 +92,14 @@
 						? activeLink.previousIndex < activeLink.currentIndex
 						: false}
 			>
-				<div class="w-full overflow-hidden whitespace-nowrap">
+				<div class="w-full inline-flex items-center overflow-hidden">
 					<span
-						class="inline-flex justify-center items-center vertical-top w-8 h-6"
+						class="shrink-0 inline-flex justify-center items-center vertical-top w-10 h-9"
 					>
 						<Icon width="18px" height="18px" />
 					</span>
 					{#if sidebar.open}
-						<span
-							class="text-sm vertical-top leading-6"
-							transition:slide={{ duration: 300 }}
+						<span class="text-sm leading-6" transition:slide={{ duration: 300 }}
 							>{label}
 						</span>
 					{/if}

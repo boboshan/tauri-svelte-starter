@@ -4,6 +4,13 @@ html {
 	-webkit-tap-highlight-color: rgba(128, 128, 128, 0.5);
 }
 
+body,
+html {
+	margin:0;
+	height:100vh;
+}
+
+
 @supports (scrollbar-color: auto) {
   html {
     scrollbar-color: var(--color-background-110) var(--color-background-100);
@@ -44,4 +51,5 @@ html {
 	--color-background-hover: #2d2d2d;
 	--color-background-front: #2f2f2f;
 	--color-content: #e0e0e0;
+	--color-content-90: #bfbfbf;
 }
